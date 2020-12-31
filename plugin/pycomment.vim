@@ -1,51 +1,52 @@
-" get cursor line content
-let s:curLineText = getline('.')
-" get cursor line number
-let s:startCurPos = line('.')
-execute('/return')
-let s:returnLineText = getline('.')
-
-" parse function
-execute('py3f parse.py')
+let s:path = fnamemodify(resolve(expand('<sfile>:p')), ':h') . '/parse.py'
 
 
 function! ParseDef()
-    if s:funcType == 'def'
-        execute("normal" . eval(s:startCurPos) . "GA\r\"\"\"\r\<BS>" . expand(s:funcName) . ".\r")
+    " get cursor line content
+    let curLineText = getline('.')
+    " get cursor line number
+    let startCurPos = line('.')
+    execute('/return')
+    let returnLineText = getline('.')
+    " parse function
+    execute('py3f ' . expand(s:path))
+    if funcType == 'def'
+        execute("normal" . eval(startCurPos) . "GA\r\"\"\"\r\<BS>" . expand(funcName) . ".\r")
 
         " write parameters
         execute("normal AParameters\r----------\r")
-        let n = len(s:parameterName)
+        let n = len(parameterName)
         for i in range(n)
-            execute("normal A" . expand(s:parameterName[i]) .  ":" . expand(s:parameterType[i]) ."\r")
+            execute("normal A" . expand(parameterName[i]) .  ":" . expand(parameterType[i]) ."\r")
         endfor
 
         " write returns
         execute("normal A\rReturns\r-------\r")
-        let n = len(s:returnVar)
+        let n = len(returnVar)
         for i in range(n)
-            execute("normal A" . expand(s:returnVar[i]) .  ":" . expand(s:returnType[i]) ."\r")
+            execute("normal A" . expand(returnVar[i]) .  ":" . expand(returnType[i]) ."\r")
         endfor
 
-        let s:endCurPos = line('.')
-        if getline(s:endCurPos+1) == "\"\"\""
-            execute("normal dd" . eval(s:startCurPos) . "G")
+        let endCurPos = line('.')
+        if getline(endCurPos+1) == "\"\"\""
+            execute("normal dd" . eval(startCurPos) . "G")
         else
-            execute("normal" . eval(s:endCurPos) . "GA\"\"\"")
-            execute("normal" . eval(s:startCurPos) . "G")
+            execute("normal" . eval(endCurPos) . "GA\"\"\"")
+            execute("normal" . eval(startCurPos) . "G")
         endif
 
-    elseif s:funcType == 'class'
-        execute("normal" . eval(s:startCurPos) . "GA\r\"\"\"\r\<BS>" . expand(s:funcName) . ".\r")
-        let s:endCurPos = line('.')
-        if getline(s:endCurPos+1) == "\"\"\""
-            execute("normal dd" . eval(s:startCurPos) . "G")
+    elseif funcType == 'class'
+        execute("normal" . eval(startCurPos) . "GA\r\"\"\"\r\<BS>" . expand(funcName) . ".\r")
+        let endCurPos = line('.')
+        if getline(endCurPos+1) == "\"\"\""
+            execute("normal dd" . eval(startCurPos) . "G")
         else
-            execute("normal" . eval(s:endCurPos) . "GA\"\"\"")
-            execute("normal" . eval(s:startCurPos) . "G")
+            execute("normal" . eval(endCurPos) . "GA\"\"\"")
+            execute("normal" . eval(startCurPos) . "G")
         endif
     endif
 endfunction
+call ParseDef()
 finish
 
 

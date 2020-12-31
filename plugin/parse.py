@@ -2,8 +2,8 @@ import vim
 import os
 
 
-curLineText = vim.eval("s:curLineText")
-returnLineText = vim.eval("s:returnLineText")
+curLineText = vim.eval("curLineText")
+returnLineText = vim.eval("returnLineText")
 # curLineText = 'def test(a:int, b:int = 1) -> int:'
 # returnLineText = 'return a, b'
 # curpos = vim.eval("s:curpos")
@@ -73,18 +73,18 @@ def FuncReturn(tail):
 
 
 funcType, funcName, parameterString, returnTypeString, existReturn = FuncHead(curLineText)
-vim.command("let s:funcType = '%s'" %funcType)
-vim.command("let s:funcName = '%s'" %funcName)
+vim.command("let funcType = '%s'" %funcType)
+vim.command("let funcName = '%s'" %funcName)
 
 if funcType == 'def':
     parameterName, parameterType = ParseParameters(parameterString)
     returnType = ParseReturnType(returnTypeString, existReturn)
     returnVar, returnVarNum = FuncReturn(returnLineText)
-    vim.command("let s:returnVar = {}".format(returnVar))
-    vim.command("let s:returnVarNum = '%s'"%returnVarNum)
-    vim.command("let s:parameterName = {}".format(parameterName))
-    vim.command("let s:parameterType = {}".format(parameterType))
-    vim.command("let s:returnType = {}" .format(returnType))
+    vim.command("let returnVar = {}".format(returnVar))
+    vim.command("let returnVarNum = '%s'"%returnVarNum)
+    vim.command("let parameterName = {}".format(parameterName))
+    vim.command("let parameterType = {}".format(parameterType))
+    vim.command("let returnType = {}" .format(returnType))
 elif funcType == 'class':
     pass
 
