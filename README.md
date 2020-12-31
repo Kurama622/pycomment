@@ -1,7 +1,6 @@
 ## pycomment
-ENGLISH | [中文版](./README_cn.md)
 
----
+ENGLISH | [中文版](./README_cn.md)
 
 ![pycomment](./screenshut/pycomment.gif)
 
