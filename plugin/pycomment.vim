@@ -1,7 +1,20 @@
 let s:path = fnamemodify(resolve(expand('<sfile>:p')), ':h') . '/parse.py'
 
+nnoremap <silent> <buffer> <Plug>(pycomment_mark) :call MarkMapping()<CR>
+nnoremap <silent> <buffer> <Plug>(pycomment) :call Parse()<CR>
+if get(g:, 'pycomment_mark_mapping', 1)
+    nmap <silent> <buffer> <leader><leader> <Plug>(pycomment_mark)
+endif
 
-function! ParseDef()
+if get(g:, 'pycomment_enable', 1)
+    nmap <silent> <buffer> <M-c> <Plug>(pycomment)
+endif
+
+function! MarkMapping()
+    execute("normal \<ESC>/<++>\<CR>:nohl\<CR>c4l")
+endfunction
+
+function! Parse()
     " get cursor line content
     let curLineText = getline('.')
     " get cursor line number
@@ -11,47 +24,42 @@ function! ParseDef()
     " parse function
     execute('py3f ' . expand(s:path))
     if funcType == 'def'
-        execute("normal" . eval(startCurPos) . "GA\r\"\"\"\r\<BS>" . expand(funcName) . ".\r")
+        execute("normal" . eval(startCurPos) . "GA\n\"\"\"\r\<BS>\<BS>" . expand(funcName) . ". \n\n")
 
         " write parameters
-        execute("normal AParameters\r----------\r")
+        execute("normal AParameters\<ESC>>>o----------\n")
         let n = len(parameterName)
         for i in range(n)
-            execute("normal A" . expand(parameterName[i]) .  ":" . expand(parameterType[i]) ."\r")
+            execute("normal A" . expand(parameterName[i]) .  " : " . expand(parameterType[i]) . ". <++>\<ESC>>>o \<ESC>>>o")
         endfor
 
         " write returns
-        execute("normal A\rReturns\r-------\r")
+        execute("normal A\nReturns\<ESC>>>o-------\n")
         let n = len(returnVar)
         for i in range(n)
-            execute("normal A" . expand(returnVar[i]) .  ":" . expand(returnType[i]) ."\r")
+            execute("normal A" . expand(returnVar[i]) .  " : " . expand(returnType[i]) . ". <++>\<ESC>>>o \<ESC>>>o")
         endfor
 
         let endCurPos = line('.')
-        if getline(endCurPos+1) == "\"\"\""
-            execute("normal dd" . eval(startCurPos) . "G")
+        let marks = getline(endCurPos+1)
+        let n_marks = len(marks)
+        if marks[n_marks-1] == "\""
+            execute("normal dd" . eval(startCurPos+1) . "G$")
         else
-            execute("normal" . eval(endCurPos) . "GA\"\"\"")
-            execute("normal" . eval(startCurPos) . "G")
+            execute("normal" . eval(endCurPos) . "GA\"\"\"\<ESC>>>")
+            execute("normal" . eval(startCurPos+1) . "G$")
         endif
 
     elseif funcType == 'class'
-        execute("normal" . eval(startCurPos) . "GA\r\"\"\"\r\<BS>" . expand(funcName) . ".\r")
+        execute("normal" . eval(startCurPos) . "GA\n\"\"\"\r\<BS>\<BS>" . expand(funcName) . ". \n\n")
         let endCurPos = line('.')
-        if getline(endCurPos+1) == "\"\"\""
-            execute("normal dd" . eval(startCurPos) . "G")
+        let marks = getline(endCurPos+1)
+        let n_marks = len(marks)
+        if marks[n_marks-1] == "\""
+            execute("normal dd" . eval(startCurPos+1) . "G$")
         else
-            execute("normal" . eval(endCurPos) . "GA\"\"\"")
-            execute("normal" . eval(startCurPos) . "G")
+            execute("normal" . eval(endCurPos) . "GA\"\"\"\<ESC>>>")
+            execute("normal" . eval(startCurPos+1) . "G$")
         endif
     endif
 endfunction
-"call ParseDef()
-finish
-
-
-def test ( a:int, b:int = 2) -> (int,int):
-   return a,b
-
-class test():
-    pass

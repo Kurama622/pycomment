@@ -73,10 +73,10 @@ def FuncReturn(tail):
 
 
 funcType, funcName, parameterString, returnTypeString, existReturn = FuncHead(curLineText)
-vim.command("let funcType = '%s'" %funcType)
-vim.command("let funcName = '%s'" %funcName)
 
 if funcType == 'def':
+    vim.command("let funcType = '%s'" %funcType)
+    vim.command("let funcName = '%s'" %funcName)
     parameterName, parameterType = ParseParameters(parameterString)
     returnType = ParseReturnType(returnTypeString, existReturn)
     returnVar, returnVarNum = FuncReturn(returnLineText)
@@ -86,7 +86,8 @@ if funcType == 'def':
     vim.command("let parameterType = {}".format(parameterType))
     vim.command("let returnType = {}" .format(returnType))
 elif funcType == 'class':
-    pass
+    vim.command("let funcType = '%s'" %funcType)
+    vim.command("let funcName = '%s'" %funcName)
 
 
 
