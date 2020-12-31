@@ -6,12 +6,12 @@
 
 ### install
 
-- [v] vim-plug
-```
+- [ v ] vim-plug
+```vim
 Plug 'demonlord1997/pycomment'
 ```
-- [v] dein
-```
+- [ v ] dein
+```vim
 [[plugins]]
 repo = 'demonlord1997/pycomment'
 on_ft = 'python'
@@ -23,6 +23,6 @@ nmap <C-c> <nop>
 nmap <silent> <C-c> <Plug>(pycomment)
 nmap <leader><leader> <ESC>/<++><CR>:nohlsearch<CR>c4l
 ```
-Press <C-c> will expand docstring.
+Press `ctrl+c` will expand docstring.
 
-Press <leader><leader> will replace `<++>` and enter insert mode.
+Press `<leader> + <leader>` will replace `<++>` and enter insert mode.
