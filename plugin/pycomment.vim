@@ -46,7 +46,7 @@ function! ParseDef()
         endif
     endif
 endfunction
-call ParseDef()
+"call ParseDef()
 finish
 
 
