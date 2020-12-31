@@ -6,11 +6,11 @@
 
 ### install
 
-- [ v ] vim-plug
+- [x] vim-plug
 ```vim
 Plug 'demonlord1997/pycomment'
 ```
-- [ v ] dein
+- [x] dein
 ```vim
 [[plugins]]
 repo = 'demonlord1997/pycomment'
