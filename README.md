@@ -1,8 +1,12 @@
 ## pycomment
 
-ENGLISH | [中文版](./README_cn.md)
+ENGLISH  |  [中文版](./README_cn.md)
 
 ![pycomment](./screenshut/pycomment.gif)
+
+### introduce
+
+Automatic generate docstring including inputed parameters, returned variable , and their type.
 
 ### install
 

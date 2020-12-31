@@ -1,8 +1,11 @@
 ## pycomment
 
-[ENGLISH](./README.md) | 中文版
+[ENGLISH](./README.md)  |  中文版
 
 ![pycomment](./screenshut/pycomment.gif)
+
+### 介绍
+根据函数的输入参数、返回变量和它们的类型，自动生成注释文档（格式同`numpy`）
 
 ### 安装
 
