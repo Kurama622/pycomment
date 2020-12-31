@@ -1,4 +1,5 @@
 ## pycomment
+ENGLISH | [中文版](./README_cn.md)
 
 ---
 
