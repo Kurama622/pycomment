@@ -64,8 +64,6 @@ def FuncReturn(tail):
     N = len(returnVarList)
     return returnVarList, N
 
-
-
 funcType, funcName, parameterString, returnTypeString, existReturn = FuncHead(curLineText)
 
 if funcType == 'def':
@@ -76,13 +74,9 @@ if funcType == 'def':
     b.vars["returnType"] = returnType
     b.vars["parameterName"] = parameterName
     b.vars["parameterType"] = parameterType
-    # vim.command("let returnType = {}".format(returnType))
-    # vim.command("let parameterName = {}".format(parameterName))
-    # vim.command("let parameterType = {}".format(parameterType))
     if returnStatus == '':
         returnVar, returnVarNum = FuncReturn(returnLineText)
         b.vars["returnVar"] = returnVar
-        # vim.command("let returnVar = {}".format(returnVar))
         vim.command("let returnVarNum = '%s'"%returnVarNum)
 elif funcType == 'class':
     vim.command("let funcType = '%s'" %funcType)
