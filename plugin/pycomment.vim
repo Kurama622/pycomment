@@ -19,8 +19,10 @@ function! Parse()
     let curLineText = getline('.')
     " get cursor line number
     let startCurPos = line('.')
-    execute('/return')
-    let returnLineText = getline('.')
+    let returnStatus = execute('/return')
+    if returnStatus != ''
+        let returnLineText = getline('.')
+    endif
     " parse function
     execute('py3f ' . expand(s:path))
     if funcType == 'def'

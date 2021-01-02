@@ -1,12 +1,10 @@
 import vim
 import os
 
-
 curLineText = vim.eval("curLineText")
-returnLineText = vim.eval("returnLineText")
-# curLineText = 'def test(a:int, b:int = 1) -> int:'
-# returnLineText = 'return a, b'
-# curpos = vim.eval("s:curpos")
+returnStatus = vim.eval("returnStatus")
+if returnStatus != '':
+    returnLineText = vim.eval("returnLineText")
 
 
 def FuncHead(head):
@@ -59,13 +57,8 @@ def ParseReturnType(returnTypeString, existReturn):
 
 def FuncReturn(tail):
     returnVarList = tail.split()[1:]
-    # print(returnVarList)
     varNumber = len(returnVarList)
     returnString = ''.join(returnVarList)
-    # returnString = ''
-    # for i in range(varNumber):
-        # returnString += returnVarList[i]
-    # print(returnString)
     returnVarList = returnString.split(',')
     N = len(returnVarList)
     return returnVarList, N
@@ -88,13 +81,3 @@ if funcType == 'def':
 elif funcType == 'class':
     vim.command("let funcType = '%s'" %funcType)
     vim.command("let funcName = '%s'" %funcName)
-
-
-
-
-# for i in range(returnVarNum):
-    # vim.command("let returnVar"+str(i)+" = '%s'"%returnVar[i])
-
-
-
-
