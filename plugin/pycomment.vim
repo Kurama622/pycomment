@@ -25,6 +25,7 @@ function! Parse()
     endif
     " parse function
     execute('py3f ' . expand(s:path))
+
     if funcType == 'def'
         execute("normal" . eval(startCurPos) . "GA\n\"\"\"\r\<BS>\<BS>" . expand(funcName) . ". \n\n")
 

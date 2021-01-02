@@ -72,13 +72,13 @@ if funcType == 'def':
     vim.command("let funcName = '%s'" %funcName)
     parameterName, parameterType = ParseParameters(parameterString)
     returnType = ParseReturnType(returnTypeString, existReturn)
+    vim.command("let returnType = {}" .format(returnType))
+    vim.command("let parameterName = {}".format(parameterName))
+    vim.command("let parameterType = {}".format(parameterType))
     if returnStatus != '':
         returnVar, returnVarNum = FuncReturn(returnLineText)
         vim.command("let returnVar = {}".format(returnVar))
         vim.command("let returnVarNum = '%s'"%returnVarNum)
-        vim.command("let parameterName = {}".format(parameterName))
-        vim.command("let parameterType = {}".format(parameterType))
-        vim.command("let returnType = {}" .format(returnType))
 elif funcType == 'class':
     vim.command("let funcType = '%s'" %funcType)
     vim.command("let funcName = '%s'" %funcName)
