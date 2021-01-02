@@ -35,7 +35,7 @@ function! Parse()
             execute("normal A" . expand(parameterName[i]) .  " : " . expand(parameterType[i]) . ". <++>\<ESC>>>o \<ESC>>>o")
         endfor
 
-        if retrunStatus != ''
+        if returnStatus != ''
             " write returns
             execute("normal A\nReturns\<ESC>>>o-------\n")
             let n = len(returnVar)
