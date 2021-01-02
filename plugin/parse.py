@@ -58,7 +58,6 @@ def ParseReturnType(returnTypeString, existReturn):
 
 def FuncReturn(tail):
     returnVarList = tail.split()[1:]
-    varNumber = len(returnVarList)
     returnString = ''.join(returnVarList)
     returnVarList = returnString.split(',')
     N = len(returnVarList)
