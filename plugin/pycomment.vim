@@ -34,14 +34,14 @@ function! Parse()
         for i in range(n)
             execute("normal A" . expand(parameterName[i]) .  " : " . expand(parameterType[i]) . ". <++>\<ESC>>>o \<ESC>>>o")
         endfor
-
-        " write returns
-        execute("normal A\nReturns\<ESC>>>o-------\n")
-        let n = len(returnVar)
-        for i in range(n)
-            execute("normal A" . expand(returnVar[i]) .  " : " . expand(returnType[i]) . ". <++>\<ESC>>>o \<ESC>>>o")
-        endfor
-
+        if existReturn != 0
+            " write returns
+            execute("normal A\nReturns\<ESC>>>o-------\n")
+            let n = len(returnVar)
+            for i in range(n)
+                execute("normal A" . expand(returnVar[i]) .  " : " . expand(returnType[i]) . ". <++>\<ESC>>>o \<ESC>>>o")
+            endfor
+        endif
         let endCurPos = line('.')
         let marks = getline(endCurPos+1)
         let n_marks = len(marks)
@@ -51,7 +51,6 @@ function! Parse()
             execute("normal" . eval(endCurPos) . "GA\"\"\"\<ESC>>>")
             execute("normal" . eval(startCurPos+1) . "G$")
         endif
-
     elseif funcType == 'class'
         execute("normal" . eval(startCurPos) . "GA\n\"\"\"\r\<BS>\<BS>" . expand(funcName) . ". \n\n")
         let endCurPos = line('.')
@@ -65,3 +64,4 @@ function! Parse()
         endif
     endif
 endfunction
+call Parse()
