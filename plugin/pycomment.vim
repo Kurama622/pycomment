@@ -19,7 +19,11 @@ function! Parse()
     let curLineText = getline('.')
     " get cursor line number
     let startCurPos = line('.')
-    let returnStatus = execute('/return')
+    try
+        let returnStatus = execute('/return')
+    catch /return$/
+        echo 'not exist return'
+    endtry
     if returnStatus == ''
         let returnLineText = getline('.')
     endif
@@ -66,4 +70,3 @@ function! Parse()
         endif
     endif
 endfunction
-
