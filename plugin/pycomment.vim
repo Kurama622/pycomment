@@ -20,7 +20,7 @@ function! Parse()
     " get cursor line number
     let startCurPos = line('.')
     let returnStatus = execute('/return')
-    if returnStatus != ''
+    if returnStatus == ''
         let returnLineText = getline('.')
     endif
     " parse function
@@ -36,7 +36,7 @@ function! Parse()
             execute("normal A" . expand(parameterName[i]) .  " : " . expand(parameterType[i]) . ". <++>\<ESC>>>o \<ESC>>>o")
         endfor
 
-        if returnStatus != ''
+        if returnStatus == ''
             " write returns
             execute("normal A\nReturns\<ESC>>>o-------\n")
             let n = len(returnVar)

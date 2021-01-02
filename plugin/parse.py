@@ -3,7 +3,7 @@ import os
 
 curLineText = vim.eval("curLineText")
 returnStatus = vim.eval("returnStatus")
-if returnStatus != '':
+if returnStatus == '':
     returnLineText = vim.eval("returnLineText")
 
 
@@ -75,7 +75,7 @@ if funcType == 'def':
     vim.command("let returnType = {}" .format(returnType))
     vim.command("let parameterName = {}".format(parameterName))
     vim.command("let parameterType = {}".format(parameterType))
-    if returnStatus != '':
+    if returnStatus == '':
         returnVar, returnVarNum = FuncReturn(returnLineText)
         vim.command("let returnVar = {}".format(returnVar))
         vim.command("let returnVarNum = '%s'"%returnVarNum)
