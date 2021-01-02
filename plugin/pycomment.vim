@@ -28,33 +28,33 @@ function! Parse()
         execute('py3f ' . expand(s:path))
         if funcType == 'def'
             if funcHeadPos == startCurPos
-                call WriteDefParameters()
+                call WriteDefParameters(startCurPos, funcName)
                 call WriteDefReturns()
-                call IsEnd()
+                call IsEnd(startCurPos)
             else
-                call WriteDefParameters()
-                call IsEnd()
+                call WriteDefParameters(startCurPos, funcName)
+                call IsEnd(startCurPos)
             endif
         elseif funcType == 'class'
             execute("normal" . eval(startCurPos) . "GA\n\"\"\"\r\<BS>\<BS>" . expand(funcName) . ". \n\n")
-            call IsEnd()
+            call IsEnd(startCurPos)
         endif
     catch /return$/
         let returnStatus = 'False'
         " parse function
         execute('py3f ' . expand(s:path))
         if funcType == 'def'
-            call WriteDefParameters()
-            call IsEnd()
+            call WriteDefParameters(startCurPos, funcName)
+            call IsEnd(startCurPos)
         elseif funcType == 'class'
             execute("normal" . eval(startCurPos) . "GA\n\"\"\"\r\<BS>\<BS>" . expand(funcName) . ". \n\n")
-            call IsEnd()
+            call IsEnd(startCurPos)
         endif
     endtry
 endfunction
 
-function! WriteDefParameters()
-    execute("normal" . eval(startCurPos) . "GA\n\"\"\"\r\<BS>\<BS>" . expand(funcName) . ". \n\n")
+function! WriteDefParameters(startCurPos, funcName)
+    execute("normal" . eval(a:startCurPos) . "GA\n\"\"\"\r\<BS>\<BS>" . expand(a:funcName) . ". \n\n")
 
     " write parameters
     execute("normal AParameters\<ESC>>>o----------\n")
@@ -73,15 +73,14 @@ function! WriteDefReturns()
     endfor
 endfunction
 
-function! IsEnd()
+function! IsEnd(startCurPos)
     let endCurPos = line('.')
     let marks = getline(endCurPos+1)
     let n_marks = len(marks)
     if marks[n_marks-1] == "\""
-        execute("normal dd" . eval(startCurPos+1) . "G$")
+        execute("normal dd" . eval(a:startCurPos+1) . "G$")
     else
         execute("normal" . eval(endCurPos) . "GA\"\"\"\<ESC>>>")
-        execute("normal" . eval(startCurPos+1) . "G$")
+        execute("normal" . eval(a:startCurPos+1) . "G$")
     endif
 endfunction
-
