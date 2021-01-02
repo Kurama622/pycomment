@@ -1,6 +1,7 @@
 import vim
 import os
 
+b = vim.current.buffer
 curLineText = vim.eval("curLineText")
 returnStatus = vim.eval("returnStatus")
 if returnStatus == '':
@@ -72,12 +73,16 @@ if funcType == 'def':
     vim.command("let funcName = '%s'" %funcName)
     parameterName, parameterType = ParseParameters(parameterString)
     returnType = ParseReturnType(returnTypeString, existReturn)
-    vim.command("let returnType = {}" .format(returnType))
-    vim.command("let parameterName = {}".format(parameterName))
-    vim.command("let parameterType = {}".format(parameterType))
+    b.vars["returnType"] = returnType
+    b.vars["parameterName"] = parameterName
+    b.vars["parameterType"] = parameterType
+    # vim.command("let returnType = {}".format(returnType))
+    # vim.command("let parameterName = {}".format(parameterName))
+    # vim.command("let parameterType = {}".format(parameterType))
     if returnStatus == '':
         returnVar, returnVarNum = FuncReturn(returnLineText)
-        vim.command("let returnVar = {}".format(returnVar))
+        b.vars["returnVar"] = returnVar
+        # vim.command("let returnVar = {}".format(returnVar))
         vim.command("let returnVarNum = '%s'"%returnVarNum)
 elif funcType == 'class':
     vim.command("let funcType = '%s'" %funcType)

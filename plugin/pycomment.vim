@@ -25,23 +25,22 @@ function! Parse()
     endif
     " parse function
     execute('py3f ' . expand(s:path))
-
     if funcType == 'def'
         execute("normal" . eval(startCurPos) . "GA\n\"\"\"\r\<BS>\<BS>" . expand(funcName) . ". \n\n")
 
         " write parameters
         execute("normal AParameters\<ESC>>>o----------\n")
-        let n = len(parameterName)
+        let n = len(b:parameterName)
         for i in range(n)
-            execute("normal A" . expand(parameterName[i]) .  " : " . expand(parameterType[i]) . ". <++>\<ESC>>>o \<ESC>>>o")
+            execute("normal A" . expand(b:parameterName[i]) .  " : " . expand(b:parameterType[i]) . ". <++>\<ESC>>>o \<ESC>>>o")
         endfor
 
         if returnStatus == ''
             " write returns
             execute("normal A\nReturns\<ESC>>>o-------\n")
-            let n = len(returnVar)
+            let n = len(b:returnVar)
             for i in range(n)
-                execute("normal A" . expand(returnVar[i]) .  " : " . expand(returnType[i]) . ". <++>\<ESC>>>o \<ESC>>>o")
+                execute("normal A" . expand(b:returnVar[i]) .  " : " . expand(b:returnType[i]) . ". <++>\<ESC>>>o \<ESC>>>o")
             endfor
         endif
 
@@ -67,3 +66,4 @@ function! Parse()
         endif
     endif
 endfunction
+
