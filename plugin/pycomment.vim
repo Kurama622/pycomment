@@ -62,6 +62,7 @@ function! Parse()
             endif
         endif
     catch /return$/
+        let returnStatus = 'False'
         " parse function
         execute('py3f ' . expand(s:path))
         if funcType == 'def'
