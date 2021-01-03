@@ -1,5 +1,7 @@
 ## pycomment
 
+![neovim](https://img.shields.io/badge/editor-neovim-green) ![vim](https://img.shields.io/badge/editor-vim-blue) ![gvim](https://img.shields.io/badge/editor-gvim-red)
+
 [ENGLISH](./README.md)  |  中文版
 
 ![pycomment](./screenshut/pycomment.gif)
