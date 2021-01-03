@@ -36,7 +36,7 @@ function! Parse()
                 call IsEnd(startCurPos)
             endif
         elseif funcType == 'class'
-            execute("normal" . eval(startCurPos) . "GA\n\"\"\"\r\<BS>\<BS>" . expand(funcName) . ". \n\n")
+            call WriteClassParameters(startCurPos, funcName)
             call IsEnd(startCurPos)
         endif
     catch /return$/
@@ -47,7 +47,7 @@ function! Parse()
             call WriteDefParameters(startCurPos, funcName)
             call IsEnd(startCurPos)
         elseif funcType == 'class'
-            execute("normal" . eval(startCurPos) . "GA\n\"\"\"\r\<BS>\<BS>" . expand(funcName) . ". \n\n")
+            call WriteClassParameters(startCurPos, funcName)
             call IsEnd(startCurPos)
         endif
     endtry
@@ -62,6 +62,10 @@ function! WriteDefParameters(startCurPos, funcName)
     for i in range(n)
         execute("normal A" . expand(b:parameterName[i]) .  " : " . expand(b:parameterType[i]) . ". <++>\<ESC>>>o \<ESC>>>o")
     endfor
+endfunction
+
+function! WriteClassParameters(startCurPos, funcName)
+    execute("normal" . eval(a:startCurPos) . "GA\n\"\"\"\r\<BS>\<BS>" . expand(a:funcName) . ". \n\n")
 endfunction
 
 function! WriteDefReturns()
