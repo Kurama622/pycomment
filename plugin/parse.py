@@ -38,12 +38,21 @@ def ParseParameters(parameterString):
     parameterName = []
     parameterType = []
     for i in range(n_parameter):
-        (name_, type_) = parameterList[i].split(':')
-        parameterName.append(name_)
-        if '=' in type_:
-            separatorPos = type_.index('=')
-            type_ = type_[:separatorPos]
-        parameterType.append(type_)
+        if ':' in parameterList[i]:
+            (name_, type_) = parameterList[i].split(':')
+            parameterName.append(name_)
+            if '=' in type_:
+                separatorPos = type_.index('=')
+                type_ = type_[:separatorPos]
+            parameterType.append(type_)
+        else:
+            if '=' in parameterList[i]:
+                namePos = parameterList[i].index('=')
+                parameterName.append(parameterList[i][:namePos])
+                parameterType.append('')
+            else:
+                parameterName.append(parameterList[i])
+                parameterType.append('')
     return parameterName, parameterType
 
 def ParseReturnType(returnTypeString, existReturn):

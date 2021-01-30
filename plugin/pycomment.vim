@@ -60,7 +60,11 @@ function! WriteDefParameters(startCurPos, funcName)
     execute("normal AParameters\<ESC>>>o----------\n")
     let n = len(b:parameterName)
     for i in range(n)
-        execute("normal A" . expand(b:parameterName[i]) .  " : " . expand(b:parameterType[i]) . ". <++>\<ESC>>>o \<ESC>>>o")
+        if expand(b:parameterType[i]) == ''
+            execute("normal A" . expand(b:parameterName[i]) .  ". <++>\<ESC>>>o \<ESC>>>o")
+        else
+            execute("normal A" . expand(b:parameterName[i]) .  " : " . expand(b:parameterType[i]) . ". <++>\<ESC>>>o \<ESC>>>o")
+        endif
     endfor
 endfunction
 
@@ -73,7 +77,11 @@ function! WriteDefReturns()
     execute("normal A\nReturns\<ESC>>>o-------\n")
     let n = len(b:returnVar)
     for i in range(n)
-        execute("normal A" . expand(b:returnVar[i]) .  " : " . expand(b:returnType[i]) . ". <++>\<ESC>>>o \<ESC>>>o")
+        if expand(b:returnType[i]) == ''
+            execute("normal A" . expand(b:returnVar[i]) . ". <++>\<ESC>>>o \<ESC>>>o")
+        else
+            execute("normal A" . expand(b:returnVar[i]) .  " : " . expand(b:returnType[i]) . ". <++>\<ESC>>>o \<ESC>>>o")
+        endif
     endfor
 endfunction
 
