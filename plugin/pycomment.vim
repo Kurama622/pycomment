@@ -3,12 +3,10 @@ let s:path = fnamemodify(resolve(expand('<sfile>:p')), ':h') . '/parse.py'
 nnoremap <silent> <buffer> <Plug>(pycomment_mark) :call MarkMapping()<CR>
 nnoremap <silent> <buffer> <Plug>(pycomment) :call Parse()<CR>
 if get(g:, 'pycomment_mark_mapping', 1)
+    nmap <silent> <buffer> <M-c> <Plug>(pycomment)
     nmap <silent> <buffer> <leader><leader> <Plug>(pycomment_mark)
 endif
 
-if get(g:, 'pycomment_enable', 1)
-    nmap <silent> <buffer> <M-c> <Plug>(pycomment)
-endif
 
 function! MarkMapping()
     execute("normal \<ESC>/<++>\<CR>:nohl\<CR>c4l")
