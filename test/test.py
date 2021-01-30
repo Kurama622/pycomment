@@ -39,7 +39,7 @@ def demo2(arg1, arg2:int=1) -> (int, str):
 
 
 def demo3(arg1=1, arg2:int) -> (int, str):
-    """demo1. 
+    """demo3. 
 
     Parameters
     ----------
