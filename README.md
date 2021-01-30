@@ -23,7 +23,8 @@ repo = 'demonlord1997/pycomment'
 on_ft = 'python'
 ```
 ### setting
-if you want to use default setting, you can write following contents in your configure.
+
+If you want to use default setting, you can write following contents in your configure.
 ```vim
 let g:pycomment_mark_mapping = 1
 ```
