@@ -13,7 +13,7 @@
 
 如果你用`vim-plug`，你可以通过下面命令安装
 ```vim
-Plug 'demonlord1997/pycomment'
+Plug 'demonlord1997/pycomment', {'for':'python'}
 ```
 如果你用`dein`，你可以通过下面命令安装
 ```vim

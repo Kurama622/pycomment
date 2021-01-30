@@ -14,7 +14,7 @@ Automatic generate docstring including inputed parameters, returned variable , a
 
 - [x] vim-plug
 ```vim
-Plug 'demonlord1997/pycomment'
+Plug 'demonlord1997/pycomment', {'for','python'}
 ```
 - [x] dein
 ```vim
