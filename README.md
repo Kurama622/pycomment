@@ -1,6 +1,6 @@
 ## pycomment
 
-![neovim](https://img.shields.io/badge/editor-neovim-green) ![vim](https://img.shields.io/badge/editor-vim-blue) ![gvim](https://img.shields.io/badge/editor-gvim-red)
+![vim](https://img.shields.io/badge/vim-neovim-red) ![gvim](https://img.shields.io/badge/gvim-blue)
 
 ENGLISH  |  [中文版](./README_cn.md)
 
@@ -23,12 +23,18 @@ repo = 'demonlord1997/pycomment'
 on_ft = 'python'
 ```
 ### setting
+if you want to use default setting, you can write following contents in your configure.
+```vim
+let g:pycomment_mark_mapping = 1
+```
+In this case, you press `Alt+c` will expand docstring. Press `<leader> + <leader>` will replace `<++>` but you will not enter insert mode.
+
 ```vim
 let g:pycomment_mark_mapping = 0
 nmap <C-c> <nop>
 nmap <silent> <C-c> <Plug>(pycomment)
 nmap <leader><leader> <ESC>/<++><CR>:nohlsearch<CR>c4l
 ```
-Press `ctrl+c` will expand docstring.
+Press `Ctrl+c` will expand docstring.
 
 Press `<leader> + <leader>` will replace `<++>` and enter insert mode.
