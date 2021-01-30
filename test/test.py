@@ -38,19 +38,6 @@ def demo2(arg1, arg2:int=1) -> (int, str):
     var2 = str(arg2)
 
 
-def demo3(arg1=1, arg2:int) -> (int, str):
-    """demo3. 
-
-    Parameters
-    ----------
-    arg1. <++>
-         
-    arg2 : int. <++>
-         
-    """
-    var1 = arg1
-    var2 = str(arg2)
-
 def testdef(a:int, b:list):
     """testdef. 
 
