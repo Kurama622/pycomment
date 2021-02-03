@@ -62,45 +62,55 @@ function! Parse()
 endfunction
 
 function! WriteDefParameters(startCurPos, funcName)
-    execute("normal" . eval(a:startCurPos) . "GA\n\"\"\"\r\<BS>\<BS>" . expand(a:funcName) . ". \n\n")
+    "execute("normal" . eval(a:startCurPos) . "GA\n\"\"\"\r\<BS>\<BS>" . expand(a:funcName) . ". \n\n")
+    execute("normal" . eval(a:startCurPos) . "GA\n\"\"\"\r")
+    execute("normal kA" . expand(a:funcName) . '. ')
 
     " write parameters
-    execute("normal AParameters\<ESC>>>o----------\n")
+    "execute("normal AParameters\<ESC>>>o----------\n")
+    execute("normal A\n\nParameters\n----------")
     let n = len(b:parameterName)
     for i in range(n)
         if expand(b:parameterType[i]) == ''
-            execute("normal A" . expand(b:parameterName[i]) .  ". <++>\<ESC>>>o \<ESC>>>o")
+            execute("normal A\n\n" . expand(b:parameterName[i]) .  ". <++>")
         else
-            execute("normal A" . expand(b:parameterName[i]) .  " : " . expand(b:parameterType[i]) . ". <++>\<ESC>>>o \<ESC>>>o")
+            execute("normal A\n\n" . expand(b:parameterName[i]) .  " : " . expand(b:parameterType[i]) . ". <++>")
         endif
     endfor
 endfunction
 
 function! WriteClassParameters(startCurPos, funcName)
-    execute("normal" . eval(a:startCurPos) . "GA\n\"\"\"\r\<BS>\<BS>" . expand(a:funcName) . ". \n\n")
+    "execute("normal" . eval(a:startCurPos) . "GA\n\"\"\"\r\<BS>\<BS>" . expand(a:funcName) . ". \n\n")
+    execute("normal" . eval(a:startCurPos) . "GA\n\"\"\"\r")
+    execute("normal kA" . expand(a:funcName) . '. ')
 endfunction
 
 function! WriteDefReturns()
     " write returns
-    execute("normal A\nReturns\<ESC>>>o-------\n")
+    "execute("normal A\nReturns\<ESC>>>o-------\n")
+    execute("normal A\n\nReturns\n-------")
     let n = len(b:returnVar)
     for i in range(n)
         if expand(b:returnType[i]) == ''
-            execute("normal A" . expand(b:returnVar[i]) . ". <++>\<ESC>>>o \<ESC>>>o")
+            ""execute("normal A" . expand(b:returnVar[i]) . ". <++>\<ESC>>>o \<ESC>>>o")
+            execute("normal A\n\n" . expand(b:returnVar[i]) . ". <++>")
         else
-            execute("normal A" . expand(b:returnVar[i]) .  " : " . expand(b:returnType[i]) . ". <++>\<ESC>>>o \<ESC>>>o")
+            "execute("normal A" . expand(b:returnVar[i]) .  " : " . expand(b:returnType[i]) . ". <++>\<ESC>>>o \<ESC>>>o")
+            execute("normal A\n\n" . expand(b:returnVar[i]) .  " : " . expand(b:returnType[i]) . ". <++>")
         endif
     endfor
 endfunction
 
 function! IsEnd(startCurPos)
     let endCurPos = line('.')
-    let marks = getline(endCurPos+1)
+    let marks = getline(endCurPos+2)
     let n_marks = len(marks)
     if marks[n_marks-1] == "\""
-        execute("normal dd" . eval(a:startCurPos+1) . "G$")
+        execute("normal " . eval(a:startCurPos+1) . "G$")
     else
-        execute("normal" . eval(endCurPos) . "GA\"\"\"\<ESC>>>")
-        execute("normal" . eval(a:startCurPos+1) . "G$")
+        execute("normal " . eval(endCurPos) . "GA\n\n\"\"\"")
+        execute("normal jdd")
+        execute("normal " . eval(a:startCurPos+1) . "G$")
     endif
 endfunction
+"call Parse()
