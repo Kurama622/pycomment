@@ -14,14 +14,22 @@ endfunction
 
 function! Parse()
     " get cursor line content
-    execute('?^def\|^class\|^ \+def\|^ \+class')
     let curLineText = getline('.')
     " get cursor line number
     let startCurPos = line('.')
+    let is_head = system("sed -n '" . expand(startCurPos) . "," . expand(startCurPos) . "p' " . expand('%') . " | grep -Eo \\[\\ \\t\\]\\+\\(def\\|class\\)\\ \\[a-zA-Z\\-\\]")
+    if is_head == ''
+        execute('?^def\|^class\|^ \+def\|^ \+class\|^\t\+def\|^\t\+class')
+        " get cursor line content
+        let curLineText = getline('.')
+        " get cursor line number
+        let startCurPos = line('.')
+    endif
+
     try
         let returnStatus = execute('/return')
         let returnLineText = getline('.')
-        execute('?^def\|^class\|^ \+def\|^ \+class')
+        execute('?^def\|^class\|^ \+def\|^ \+class\|^\t\+def\|^\t\+class')
         let funcHeadPos = line('.')
 
         execute('py3f ' . expand(s:path))
@@ -95,4 +103,5 @@ function! IsEnd(startCurPos)
         execute("normal" . eval(a:startCurPos+1) . "G$")
     endif
 endfunction
-
+call Parse()
+finish
