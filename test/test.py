@@ -121,7 +121,6 @@ class democlass():
         a=1
         return a
 
-
 class xxxx:
     """xxxx. 
 

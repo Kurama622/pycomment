@@ -62,12 +62,10 @@ function! Parse()
 endfunction
 
 function! WriteDefParameters(startCurPos, funcName)
-    "execute("normal" . eval(a:startCurPos) . "GA\n\"\"\"\r\<BS>\<BS>" . expand(a:funcName) . ". \n\n")
     execute("normal" . eval(a:startCurPos) . "GA\n\"\"\"\r")
     execute("normal kA" . expand(a:funcName) . '. ')
 
     " write parameters
-    "execute("normal AParameters\<ESC>>>o----------\n")
     execute("normal A\n\nParameters\n----------")
     let n = len(b:parameterName)
     for i in range(n)
@@ -80,22 +78,18 @@ function! WriteDefParameters(startCurPos, funcName)
 endfunction
 
 function! WriteClassParameters(startCurPos, funcName)
-    "execute("normal" . eval(a:startCurPos) . "GA\n\"\"\"\r\<BS>\<BS>" . expand(a:funcName) . ". \n\n")
     execute("normal" . eval(a:startCurPos) . "GA\n\"\"\"\r")
     execute("normal kA" . expand(a:funcName) . '. ')
 endfunction
 
 function! WriteDefReturns()
     " write returns
-    "execute("normal A\nReturns\<ESC>>>o-------\n")
     execute("normal A\n\nReturns\n-------")
     let n = len(b:returnVar)
     for i in range(n)
         if expand(b:returnType[i]) == ''
-            ""execute("normal A" . expand(b:returnVar[i]) . ". <++>\<ESC>>>o \<ESC>>>o")
             execute("normal A\n\n" . expand(b:returnVar[i]) . ". <++>")
         else
-            "execute("normal A" . expand(b:returnVar[i]) .  " : " . expand(b:returnType[i]) . ". <++>\<ESC>>>o \<ESC>>>o")
             execute("normal A\n\n" . expand(b:returnVar[i]) .  " : " . expand(b:returnType[i]) . ". <++>")
         endif
     endfor
@@ -113,4 +107,3 @@ function! IsEnd(startCurPos)
         execute("normal " . eval(a:startCurPos+1) . "G$")
     endif
 endfunction
-call Parse()

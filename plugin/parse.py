@@ -76,6 +76,19 @@ def ParseReturnType(returnTypeString, existReturn):
 
 
 def FuncReturn(tail):
+"""FuncReturn. 
+
+Parameters
+----------
+
+tail. <++>
+
+Returns
+-------
+
+=tail.split()[1:]. <++>
+
+"""
     returnVarList = tail.split()[1:]
     returnString = ''.join(returnVarList)
     returnVarList = returnString.split(',')
