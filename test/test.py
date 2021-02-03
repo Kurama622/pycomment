@@ -1,13 +1,4 @@
 def demo(arg1:int, arg2:float) -> (int, str):
-    """demo. 
-
-    Parameters
-    ----------
-    arg1 : int. <++>
-         
-    arg2 : float. <++>
-         
-    """
     var1 = arg1
     var2 = str(arg2)
 
@@ -85,6 +76,9 @@ def testdef2(a:int, b:float):
     return a
 
 class test():
+""test. 
+
+    """
     """test. 
 
     """

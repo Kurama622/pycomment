@@ -17,9 +17,9 @@ function! Parse()
     let curLineText = getline('.')
     " get cursor line number
     let startCurPos = line('.')
-    let is_head = system("sed -n '" . expand(startCurPos) . "," . expand(startCurPos) . "p' " . expand('%') . " | grep -Eo \\[\\ \\t\\]\\+\\(def\\|class\\)\\ \\[a-zA-Z\\-\\]")
+    let is_head = system("sed -n '" . expand(startCurPos) . "," . expand(startCurPos) . "p' " . expand('%') . " | grep -E \\[\\ \\t\\]\\*\\(def\\|class\\)\\ ")
     if is_head == ''
-        execute('?^def\|^class\|^ \+def\|^ \+class\|^\t\+def\|^\t\+class')
+        execute('?^ *def\|^ *class\|^\t*def\|^\t*class')
         " get cursor line content
         let curLineText = getline('.')
         " get cursor line number
@@ -29,7 +29,7 @@ function! Parse()
     try
         let returnStatus = execute('/return')
         let returnLineText = getline('.')
-        execute('?^def\|^class\|^ \+def\|^ \+class\|^\t\+def\|^\t\+class')
+        execute('?^ *def\|^ *class\|^\t*def\|^\t*class')
         let funcHeadPos = line('.')
 
         execute('py3f ' . expand(s:path))
@@ -105,3 +105,8 @@ function! IsEnd(startCurPos)
 endfunction
 call Parse()
 finish
+def a
+class b
+    def c
+    class d
+    defsgakf = fjka
