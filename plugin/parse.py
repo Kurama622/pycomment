@@ -2,8 +2,8 @@ import vim
 import os
 
 b = vim.current.buffer
-curLineText = vim.eval("curLineText")
-returnStatus = vim.eval("returnStatus")
+curLineText = vim.eval("s:curLineText")
+returnStatus = vim.eval("s:returnStatus")
 if returnStatus == '':
     returnLineText = vim.eval("returnLineText")
 

@@ -14,16 +14,17 @@ endfunction
 
 function! Parse()
     " get cursor line content
-    let curLineText = getline('.')
+    let s:curLineText = getline('.')
     " get cursor line number
-    let startCurPos = line('.')
-    let is_head = system("sed -n '" . expand(startCurPos) . "," . expand(startCurPos) . "p' " . expand('%') . " | grep -E \\[\\ \\t\\]\\*\\(def\\|class\\)\\ ")
-    if is_head == ''
+    let s:startCurPos = line('.')
+    let s:is_head = system("sed -n '" . expand(s:startCurPos) . "," . expand(s:startCurPos) . "p' " . expand('%') . " | grep -E \\[\\ \\t\\]\\*\\(def\\|class\\)\\ ")
+    echo is_head
+    if s:is_head == ''
         execute('?^ *def\|^ *class\|^\t*def\|^\t*class')
         " get cursor line content
-        let curLineText = getline('.')
+        let s:curLineText = getline('.')
         " get cursor line number
-        let startCurPos = line('.')
+        let s:startCurPos = line('.')
     endif
 
     try
@@ -34,28 +35,28 @@ function! Parse()
 
         execute('py3f ' . expand(s:path))
         if funcType == 'def'
-            if funcHeadPos == startCurPos
-                call WriteDefParameters(startCurPos, funcName)
+            if funcHeadPos == s:startCurPos
+                call WriteDefParameters(s:startCurPos, funcName)
                 call WriteDefReturns()
-                call IsEnd(startCurPos)
+                call IsEnd(s:startCurPos)
             else
-                call WriteDefParameters(startCurPos, funcName)
-                call IsEnd(startCurPos)
+                call WriteDefParameters(s:startCurPos, funcName)
+                call IsEnd(s:startCurPos)
             endif
         elseif funcType == 'class'
-            call WriteClassParameters(startCurPos, funcName)
-            call IsEnd(startCurPos)
+            call WriteClassParameters(s:startCurPos, funcName)
+            call IsEnd(s:startCurPos)
         endif
     catch /return$/
         let returnStatus = 'False'
         " parse function
         execute('py3f ' . expand(s:path))
         if funcType == 'def'
-            call WriteDefParameters(startCurPos, funcName)
-            call IsEnd(startCurPos)
+            call WriteDefParameters(s:startCurPos, funcName)
+            call IsEnd(s:startCurPos)
         elseif funcType == 'class'
-            call WriteClassParameters(startCurPos, funcName)
-            call IsEnd(startCurPos)
+            call WriteClassParameters(s:startCurPos, funcName)
+            call IsEnd(s:startCurPos)
         endif
     endtry
 endfunction
@@ -103,3 +104,4 @@ function! IsEnd(startCurPos)
         execute("normal" . eval(a:startCurPos+1) . "G$")
     endif
 endfunction
+call Parse()
