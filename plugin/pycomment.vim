@@ -14,13 +14,14 @@ endfunction
 
 function! Parse()
     " get cursor line content
+    execute('?^def\|^class\|^ \+def\|^ \+class')
     let curLineText = getline('.')
     " get cursor line number
     let startCurPos = line('.')
     try
         let returnStatus = execute('/return')
         let returnLineText = getline('.')
-        execute('?def\|class')
+        execute('?^def\|^class\|^ \+def\|^ \+class')
         let funcHeadPos = line('.')
 
         execute('py3f ' . expand(s:path))
@@ -94,3 +95,4 @@ function! IsEnd(startCurPos)
         execute("normal" . eval(a:startCurPos+1) . "G$")
     endif
 endfunction
+
