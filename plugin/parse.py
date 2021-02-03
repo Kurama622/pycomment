@@ -14,22 +14,32 @@ def FuncHead(head):
     headstring = "".join(headList[1:])
     if '->' in headstring:
         (inputString, outString) = headstring.split('->')
-        separatorPos = inputString.index('(')
-        funcName = inputString[:separatorPos]
-        parameterString = inputString[separatorPos+1:-1]
-        if outString[0] == '(':
-            returnTypeString = outString[1:-2]
-            existReturn = 2
+        if '(' in inputString:
+            separatorPos = inputString.index('(')
+            funcName = inputString[:separatorPos]
+            parameterString = inputString[separatorPos+1:-1]
+            if outString[0] == '(':
+                returnTypeString = outString[1:-2]
+                existReturn = 2
+            else:
+                returnTypeString = outString[0:-1]
+                existReturn = 1
         else:
-            returnTypeString = outString[0:-1]
-            existReturn = 1
+            separatorPos = inputString.index(':')
+            funcName = inputString[:separatorPos]       # class
+            parameterString, returnTypeString, existReturn = 0, 0, 0
     else:
         inputString = headstring
-        separatorPos = inputString.index('(')
-        funcName = inputString[:separatorPos]
-        parameterString = inputString[separatorPos+1:-2]
-        returnTypeString = None
-        existReturn = 0
+        if '(' in inputString:
+            separatorPos = inputString.index('(')
+            funcName = inputString[:separatorPos]
+            parameterString = inputString[separatorPos+1:-2]
+            returnTypeString = None
+            existReturn = 0
+        else:
+            separatorPos = inputString.index(':')
+            funcName = inputString[:separatorPos]       # class
+            parameterString, returnTypeString, existReturn = 0, 0, 0
     return funcType, funcName, parameterString, returnTypeString, existReturn
 
 def ParseParameters(parameterString):
