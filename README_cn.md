@@ -34,7 +34,7 @@ nmap <C-c> <nop>
 nmap <silent> <C-c> <Plug>(pycomment)
 nmap <leader><leader> <ESC>/<++><CR>:nohlsearch<CR>c4l
 ```
-在函数定义处按下 `ctrl+c` 将会展开注释文档。
+在函数定义处或者函数体内按下 `ctrl+c` 将会展开注释文档。
 
 按两次`<leader>`键，将会定位到标识符`<++>`处，并进入到vim的插入模式。
 

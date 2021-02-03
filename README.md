@@ -28,7 +28,9 @@ If you want to use default setting, you can write following contents in your con
 ```vim
 let g:pycomment_mark_mapping = 1
 ```
-In this case, you press `Alt+c` will expand docstring. Press `<leader> + <leader>` will replace `<++>` but you will not enter insert mode.
+In this case, pressing `Ctrl+c` in the function definition or the function body will expand docstring. Press `<leader> + <leader>` will replace `<++>` but you will not enter insert mode.
+
+
 
 ```vim
 let g:pycomment_mark_mapping = 0
