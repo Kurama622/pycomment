@@ -18,7 +18,7 @@ function! Parse()
     " get cursor line number
     let s:startCurPos = line('.')
     let s:is_head = system("sed -n '" . expand(s:startCurPos) . "," . expand(s:startCurPos) . "p' " . expand('%') . " | grep -E \\[\\ \\t\\]\\*\\(def\\|class\\)\\ ")
-    echo is_head
+    echo s:is_head
     if s:is_head == ''
         execute('?^ *def\|^ *class\|^\t*def\|^\t*class')
         " get cursor line content
