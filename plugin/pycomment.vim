@@ -18,7 +18,6 @@ function! Parse()
     " get cursor line number
     let startCurPos = line('.')
     let is_head = system("sed -n '" . expand(startCurPos) . "," . expand(startCurPos) . "p' " . expand('%') . " | grep -E \\[\\ \\t\\]\\*\\(def\\|class\\)\\ ")
-    echo is_head
     if is_head == ''
         execute('?^ *def\|^ *class\|^\t*def\|^\t*class')
         " get cursor line content
@@ -59,6 +58,7 @@ function! Parse()
             call IsEnd(startCurPos)
         endif
     endtry
+    execute(':w')
 endfunction
 
 function! WriteDefParameters(startCurPos, funcName)
@@ -104,4 +104,4 @@ function! IsEnd(startCurPos)
         execute("normal" . eval(a:startCurPos+1) . "G$")
     endif
 endfunction
-"call Parse()
+call Parse()
