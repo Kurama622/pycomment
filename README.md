@@ -1,19 +1,19 @@
-## pycomment
+# pycomment
 
 ![vim](https://img.shields.io/badge/vim-neovim-red) ![gvim](https://img.shields.io/badge/gvim-blue)
 
 ENGLISH  |  [中文版](./README_cn.md)
 
-### show
+## show
 ![pycomment](./screenshut/pycomment1.gif)
 
 ![pycomment2](./screenshut/pycomment2.gif)
 
-### introduce
+## introduce
 
 Automatic generate docstring including inputed parameters, returned variable , and their type.
 
-### install
+## install
 
 - [x] vim-plug
 ```vim
@@ -25,7 +25,7 @@ Plug 'demonlord1997/pycomment', {'for','python'}
 repo = 'demonlord1997/pycomment'
 on_ft = 'python'
 ```
-### setting
+## setting
 
 If you want to use default setting, you can write following contents in your configure.
 ```vim

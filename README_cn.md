@@ -1,18 +1,18 @@
-## pycomment
+# pycomment
 
 ![vim](https://img.shields.io/badge/vim-neovim-red) ![gvim](https://img.shields.io/badge/gvim-blue)
 
 [ENGLISH](./README.md)  |  中文版
 
-### 展示
+## 展示
 ![pycomment](./screenshut/pycomment1.gif)
 
 ![pycomment2](./screenshut/pycomment2.gif)
 
-### 介绍
+## 介绍
 根据函数的输入参数、返回变量和它们的类型，自动生成注释文档（格式同`numpy`）
 
-### 安装
+## 安装
 
 如果你用`vim-plug`，你可以通过下面命令安装
 ```vim
@@ -24,7 +24,7 @@ Plug 'demonlord1997/pycomment', {'for':'python'}
 repo = 'demonlord1997/pycomment'
 on_ft = 'python'
 ```
-### 配置
+## 配置
 在你的配置文件（`.vimrc`/`init.vim`）中，写入
 ```vim
 let g:pycomment_mark_mapping = 1
