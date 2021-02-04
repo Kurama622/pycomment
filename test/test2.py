@@ -1,40 +1,42 @@
-def testdef1(a):
-    """testdef1. some words
+def testdef1(a, b):
+    """testdef1. func
 
     Parameters
     ----------
 
-    a. bala
+    a. var
+
+    b. var
 
     Returns
     -------
 
-    a. bala
+    a. ret
 
     """
     return a
 
 
 class testClass:
-    """testClass. a class
+    """testClass. class
 
     """
     def testfunc1(self, a:int, b:float) -> int:
-        """testfunc1. xx
+        """testfunc1. 
 
         Parameters
         ----------
 
-        self. xx
+        self. <++>
 
-        a : int. fakfjla
+        a : int. <++>
 
-        b : float. var
+        b : float. <++>
 
         Returns
         -------
 
-        a : int. var
+        a : int. <++>
 
         """
         a = 100
@@ -46,9 +48,9 @@ class testClass:
         Parameters
         ----------
 
-        self. afkaj
+        self. <++>
 
-        a : int. kafl
+        a : int. <++>
 
         b : float. <++>
 

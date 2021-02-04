@@ -4,7 +4,10 @@
 
 [ENGLISH](./README.md)  |  中文版
 
-![pycomment](./screenshut/pycomment.gif)
+### 展示
+![pycomment](./screenshut/pycomment1.gif)
+
+![pycomment2](./screenshut/pycomment2.gif)
 
 ### 介绍
 根据函数的输入参数、返回变量和它们的类型，自动生成注释文档（格式同`numpy`）

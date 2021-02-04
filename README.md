@@ -4,7 +4,10 @@
 
 ENGLISH  |  [中文版](./README_cn.md)
 
-![pycomment](./screenshut/pycomment.gif)
+### show
+![pycomment](./screenshut/pycomment1.gif)
+
+![pycomment2](./screenshut/pycomment2.gif)
 
 ### introduce
 
