@@ -11,7 +11,7 @@ ENGLISH  |  [中文版](./README_cn.md)
 
 ## Introduction
 
-Automatic generate docstring including inputed parameters, returned variable , and their type.
+Automatic generate docstring including inputed parameters, returned variables, and their types.
 
 ## Install
 
@@ -25,9 +25,9 @@ Plug 'demonlord1997/pycomment', {'for','python'}
 repo = 'demonlord1997/pycomment'
 on_ft = 'python'
 ```
-## Setting
+## Settings
 
-If you want to use default setting, you can write following contents in your configure.
+If you want to use default settings, you can write following contents in your configure.
 ```vim
 let g:pycomment_mark_mapping = 1
 ```
